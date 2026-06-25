@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash TV - Box der Wahrheit</title>
+    <style>
+        :root {
+            --primary: #ff007f;
+            --secondary: #00ffff;
+            --dark: #121212;
+            --light: #ffffff;
+            --highlight: #ffe600;
+            --success: #00ff88;
+            --error: #ff4d4d;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1f1f1f, #2e2e2e);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px var(--secondary);
+            margin-top: 0;
+        }
+
+        .intro-text {
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .quiz-group {
+            background: #252525;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary);
+            text-align: left;
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .word-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .input-letter {
+            width: 34px;
+            height: 38px;
+            font-size: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            border: 2px solid #555;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .input-letter:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: #444;
+        }
+
+        .input-letter.correct {
+            border-color: var(--success);
+        }
+
+        .input-letter.wrong {
+            border-color: var(--error);
+        }
+
+        .input-letter.reveal-letter {
+            background: var(--highlight);
+            color: #000;
+            border-color: var(--highlight) !important;
+            box-shadow: 0 0 14px var(--highlight);
+            transform: scale(1.08);
+            font-weight: bold;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px var(--primary);
+        }
+
+        #success-message {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #00ffcc, #0099ff);
+            color: #000;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .result-word {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 14px;
+            background: #fff;
+            color: #000;
+            border-radius: 10px;
+            font-size: 30px;
+            letter-spacing: 4px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚨 Das Tablet der Wahrheit 🚨</h1>
+    <p class="intro-text">Liebe Maya, löse das Rätsel, um dein Match und deinen Gewinn freizuschalten! PS: Schummeln und Wanda fragen gilt nicht!</p>
+
+    <div id="quiz-form">
+        <div class="quiz-group">
+            <label class="question">1. Wie hieß die Trash TV Show, die Jan auf dem Atlantik gucken musste?</label>
+            <div class="word-input" data-answer="FBOYISLAND"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">2. Wer moderiert Ex on the Beach?</label>
+            <div class="word-input" data-answer="LOLA"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">3. Mit wem zusammen sucht Karim die vermisste Joanna nach ihrem zwielichtigen Date mit Lucas?</label>
+            <div class="word-input" data-answer="INDIRA"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">4. Wer brach bei Staffel 8 von Temptation Island vorzeitig die Show ab, um mit seinem Partner (Etienne) die Heimreise anzutreten?</label>
+            <div class="word-input" data-answer="CHARLEEN"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">5. Wer moderiert in der 8. Staffel von Temptation Island?</label>
+            <div class="word-input" data-answer="JANIN"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">6. Wer moderiert Are you the one?</label>
+            <div class="word-input" data-answer="SOPHIA"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">7. Die Teilnahme bei Prominent getrennt eines Pärchens wurde heiß diskutiert. Wie heißt die Ex-Freundin von Aleks Petrovic?</label>
+            <div class="word-input" data-answer="VANESSA"></div>
+        </div>
+
+        <div class="quiz-group">
+            <label class="question">8. Wie nennt sich das Ereignis, bei dem die vergebenen Partner in Form von Videos sehen, wie sich ihre Liebsten in der anderen Villa verhalten?</label>
+            <div class="word-input" data-answer="LAGERFEUER"></div>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Eingabe überprüfen</button>
+    </div>
+
+    <div id="success-message"></div>
+</div>
+
+<script>
+    document.querySelectorAll('.word-input').forEach(wrapper => {
+        const answerLength = wrapper.dataset.answer.length;
+
+        for (let i = 0; i < answerLength; i++) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = 1;
+            input.className = 'input-letter';
+            input.setAttribute('aria-label', 'Buchstabe ' + (i + 1));
+
+            input.addEventListener('input', function () {
+                this.value = this.value.toUpperCase().replace(/[^A-ZÄÖÜ]/g, '');
+                if (this.value.length === 1 && this.nextElementSibling) {
+                    this.nextElementSibling.focus();
+                }
+            });
+
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value.length === 0 && this.previousElementSibling) {
+                    this.previousElementSibling.focus();
+                }
+            });
+
+            wrapper.appendChild(input);
+        }
+    });
+
+    function checkAnswers() {
+        let allCorrect = true;
+        const wrappers = document.querySelectorAll('.word-input');
+        const successMessage = document.getElementById('success-message');
+
+        wrappers.forEach(wrapper => {
+            const correctAnswer = wrapper.dataset.answer.toUpperCase();
+            const inputs = wrapper.querySelectorAll('.input-letter');
+            let userAnswer = '';
+
+            inputs.forEach(input => {
+                input.classList.remove('correct', 'wrong', 'reveal-letter');
+                userAnswer += input.value.toUpperCase();
+            });
+
+            if (userAnswer !== correctAnswer) {
+                allCorrect = false;
+                inputs.forEach(input => input.classList.add('wrong'));
+            } else {
+                inputs.forEach(input => input.classList.add('correct'));
+            }
+        });
+
+        if (!allCorrect) {
+            successMessage.style.display = 'none';
+            alert('❌ Das ist leider noch nicht die ganze Wahrheit! Du darfst einmal Wanda um Hilfe bitten.');
+            return;
+        }
+
+        const highlightMap = [
+            { question: 0, letter: 1 },
+            { question: 1, letter: 1 },
+            { question: 2, letter: 2 },
+            { question: 3, letter: 5 },
+            { question: 4, letter: 2 },
+            { question: 5, letter: 0 },
+            { question: 6, letter: 3 },
+            { question: 7, letter: 3 }
+        ];
+
+        let resultWord = '';
+
+        highlightMap.forEach(item => {
+            const wrapper = wrappers[item.question];
+            if (!wrapper) return;
+
+            const inputs = wrapper.querySelectorAll('.input-letter');
+            const targetInput = inputs[item.letter];
+
+            if (targetInput) {
+                targetInput.classList.add('reveal-letter');
+                resultWord += targetInput.value.toUpperCase();
+            }
+        });
+
+        successMessage.innerHTML = `
+            🎉 GEWONNEN! Du hast den Reality-Check bestanden!<br><br>
+            Die markierten Buchstaben ergeben unseren nächsten Kurzurlaub am:<br>
+            <span class="result-word">${resultWord}</span>
+        `;
+        successMessage.style.display = 'block';
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+
+</body>
+</html>
