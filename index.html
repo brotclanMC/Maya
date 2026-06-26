@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trash TV - Box der Wahrheit</title>
+    <title>Trash TV - Quiz der Wahrheit</title>
     <style>
         :root {
             --primary: #ff007f;
@@ -75,7 +75,7 @@
         .input-letter {
             width: 34px;
             height: 38px;
-            font-size: 12px;
+            font-size: 14px;
             text-align: center;
             text-transform: uppercase;
             border: 2px solid #555;
@@ -84,7 +84,7 @@
             border-radius: 4px;
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
         }
-        
+
         .input-letter:focus {
             border-color: var(--primary);
             outline: none;
@@ -161,7 +161,7 @@
 
 <div class="container">
     <h1>🚨 Das Tablet der Wahrheit 🚨</h1>
-    <p class="intro-text">Liebe Maya, löse das Rätsel, um dein Match und deinen Gewinn freizuschalten! PS: Schummeln und Wanda fragen gilt nicht!</p>
+    <p class="intro-text">Liebe Maya, löse das Rätsel, um dein Geschenk zu erfahren! PS: Schummeln und Wanda fragen gilt nicht!</p>
 
     <div id="quiz-form">
         <div class="quiz-group">
@@ -210,6 +210,18 @@
     <div id="success-message"></div>
 </div>
 
+
+<iframe
+    id="soundcloud-player"
+    width="0"
+    height="0"
+    scrolling="no"
+    frameborder="no"
+    allow="autoplay"
+    style="position:absolute; left:-9999px;"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-808998381/tablet-o-fterror&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false">
+</iframe>
+
 <script>
     document.querySelectorAll('.word-input').forEach(wrapper => {
         const answerLength = wrapper.dataset.answer.length;
@@ -237,6 +249,26 @@
             wrapper.appendChild(input);
         }
     });
+
+    let soundStarted = false;
+
+    function startSoundOnce() {
+        if (soundStarted) return;
+        soundStarted = true;
+
+        const player = document.getElementById('soundcloud-player');
+        if (!player) return;
+
+        player.src = "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-808998381/tablet-o-fterror&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false";
+    }
+
+    const firstInput = document.querySelector('.word-input .input-letter');
+    if (firstInput) {
+        firstInput.addEventListener('focus', startSoundOnce, { once: true });
+        firstInput.addEventListener('click', startSoundOnce, { once: true });
+        firstInput.addEventListener('input', startSoundOnce, { once: true });
+        firstInput.addEventListener('touchstart', startSoundOnce, { once: true });
+    }
 
     function checkAnswers() {
         let allCorrect = true;
@@ -296,7 +328,7 @@
         successMessage.innerHTML = `
             🎉 GEWONNEN! Du hast den Reality-Check bestanden!<br><br>
             Die markierten Buchstaben ergeben unseren nächsten Kurzurlaub:<br>
-            
+           
         `;
         successMessage.style.display = 'block';
         successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
